@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hangman Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap File -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/game.js"></script>
+</head>
+
+<body>
+    <!-- Overall Bootstrap Grid -->
+    <div class="container">
+
+        <!-- Jumbotron with Title -->
+        <div class="jumbotron">
+            <h1 class="text-center">
+                <strong>Hangman Game</strong>
+            </h1>
+            <hr>
+            <div id="musicControls" class="text-center">
+                <button class="btn btn-warning btn-xs theme-button">
+                    <span class="glyphicon glyphicon-music"></span>Music!</button>
+                <button class="btn btn-dark btn-xs pause-button">
+                    <span class="glyphicon glyphicon-pause"></span>Stop Music</button>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-lg-7">
+
+                <!-- Controls (Superpower Grow/Shrink)-->
+                <div id="Instructions" class="card">
+                    <h4 class="card-header text-center">Press any key to get started!</h4>
+                    <!-- <h4 class="card-header text-center">Gameplay</h4> -->
+                    <div class="card-body">
+                        <div class="text-center gameLabels">
+                            <p>
+                                Wins:
+                                <span id="wins-panel">Test Panel</span>
+                            </p>
+                            <p>
+                                Losses:
+                                <span id="losses-panel">Test Panel</span>
+                            </p>
+                            <p>
+                                Current Word
+                            </p>
+                            <p>
+                                <span id="currentWord"></span>
+                            </p>
+                            <p>
+                                Number of Guesses Remaining:
+                                <span id="guessesRemaining">Test Panel</span>
+                            </p>
+                            <p>
+                                Letters already guesses
+                            </p>
+                            <p>
+                                <span id="lettersGuessed"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+
+                <!-- Hangman Image -->
+                <img src="assets/images/hangman-image.jpg" alt="HANGMAN ANIMATION" class="img hangman-image" style="position:absolute">
+                <!-- ; top:50px; left: 80px; z-index: -20; height: 300px"> -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
