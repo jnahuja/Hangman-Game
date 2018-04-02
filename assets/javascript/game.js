@@ -3,7 +3,8 @@ $(document).ready(function () {
     // Define our initial variables, including "wins", "losses", "word array", and an empty variable for the user's letter guess
     var wins = 0;
     var losses = 0;
-    var wordBank = ["melon", "city", "square", "pop"];
+    var wordBank = ["jedi","sith","empire","deathstar","force","skywalker","yoda","luke","stormtrooper","leia","chewbacca","tatooine","naboo","alderaan","coruscant","droid","clone","dooku"];
+    // var wordBank = ["jedi","sith","Empire","Deathstar","Force","melon", "city", "square", "pop"];
     var userGuess;
 
     var main = $("body");
@@ -13,9 +14,9 @@ $(document).ready(function () {
     var winsDiv = main.find("#winsPanel");
     var lossesDiv = main.find("#lossesPanel");
 
-    // Gets Link for Theme Song
+    // Gets Link for Theme Song - Sound from http://www.soundboard.com/sb/sound/657
     var audioElement = document.createElement("audio");
-    audioElement.setAttribute("src", "assets/captainplanet24.mp3");
+    audioElement.setAttribute("src", "assets/star-wars-theme.mp3");
 
     // Theme Button
     $("#musicControls").on("click", ".theme-button", function() {
@@ -97,28 +98,6 @@ $(document).ready(function () {
             this.initializeGuessesRemainingDiv();
 
         }
-
-        // secondBuildWord: function () {
-        //     wordHolder = document.getElementById('currentWord');
-        //     correct = document.createElement('ul');
-
-        //     for (var i = 0; i < this.mainWord.length; i++) {
-        //       correct.setAttribute('id', 'my-word');
-        //       guess = document.createElement('li');
-        //       guess.setAttribute('class', 'guess');
-        //       guess.innerHTML = "_";
-        //     //   if (word[i] === "-") {
-        //     //     guess.innerHTML = "-";
-        //     //     space = 1;
-        //     //   } else {
-        //     //     guess.innerHTML = "_";
-        //     //   }
-
-        //     //   geusses.push(guess);
-        //       wordHolder.appendChild(correct);
-        //       correct.appendChild(guess);
-        //     }
-        //   }
     }
 
     gamePlay.initialize();
@@ -192,7 +171,7 @@ $(document).ready(function () {
             }
             if (gamePlay.guessesRemaining == 0) {
                 losses = losses + 1;
-                alert("You Lose!");
+                alert("You Lose! Correct answer was '" + gamePlay.mainWordString + "'");
                 restartGame = confirm("Would you like to play another game?");
             }
             if (restartGame) {
@@ -201,69 +180,5 @@ $(document).ready(function () {
                 gamePlay.initialize();
             }
         }, 10);
-
-        // winsDiv.text(wins);
-        // lossesDiv.text(losses);
-
     }
-
-
-
-    // var excessObject {
-
-    //     makeGuess: function (x) {
-    //         this.guessesRemaining = this.guessesRemaining - 1;
-    //         //if (x
-    //     },
-
-    //     guessReset: function () {
-    //         this.guessesRemaining = 10;
-    //     },
-
-    //     wordBankIndexReset: function () {
-    //         this.wordBankIndex = 0;
-    //     },
-
-    // }
-
-
-
-    // Function that adds a word to an ever-growing wordBank array
-    // function addWord(x) {
-    // wordBank.push(x);
-    // }
-
-    // Need a validation to prevent duplicate words from being added to the wordBank array
-    // Need a function to remove words from the wordBank
-
-    // Function that updates the wins on screen
-    // function updateWins() {
-    //     document.querySelector("#wins").innerHTML = "Wins: " + wins;
-    // }
-
-    // function renderQuestion() {
-    //     // If there are still more questions, render the next one.
-    //     if (questionIndex <= (questionsArray.length - 1)) {
-    //         document.querySelector("#question").innerHTML = questionsArray[questionIndex][0];
-    //     }
-    //     // If there aren't, render the end game screen.
-    //     else {
-    //         document.querySelector("#question").innerHTML = "Game Over!";
-    //         document.querySelector("#score").innerHTML = "Final Score: " + score + " out of " + questionsArray.length;
-    //     }
-    // }
-
-
-    // // MAIN PROCESS
-    // // ==============================================================================
-
-    // // Calling functions to start the game.
-    // renderQuestion();
-    // updateScore();
-
-
-    // var userGuessHTML = document.getElementById("userGuess");
-
-
-
 });
