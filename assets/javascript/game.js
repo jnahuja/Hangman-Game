@@ -200,7 +200,7 @@ $(document).ready(function () {
                 lettersGuessedDiv.empty();
                 gamePlay.initialize();
             }
-        }, 1000);
+        }, 10);
 
         // winsDiv.text(wins);
         // lossesDiv.text(losses);
