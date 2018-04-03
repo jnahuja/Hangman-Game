@@ -125,6 +125,7 @@ $(document).ready(function () {
     // gamePlay.secondBuildWord();
 
     var drawHangman = {
+        // lives: 0,
         drawHangmanArray: [this.rightLeg, this.leftLeg, this.rightArm, this.leftArm, this.torso, this.head, this.frame4, this.frame3, this.frame2, this.frame1],
 
         // Hangman
@@ -198,10 +199,10 @@ $(document).ready(function () {
         },
 
         // Animate man
-        animate: function () {
-            var drawMe = lives;
-            drawArray[drawMe]();
-        },
+        // animate: function () {
+        //     var drawMe = this.lives;
+        //     this.drawHangmanArray[drawMe]();
+        // },
     }
 
     // drawHangman.canvas();
@@ -272,6 +273,9 @@ $(document).ready(function () {
                 lettersGuessedDiv.append(letterDiv);
                 gamePlay.lettersWrong.push(userGuess);
                 gamePlay.guessesRemaining = gamePlay.guessesRemaining - 1;
+                drawHangman.lives = gamePlay.guessesRemaining
+
+                // drawHangman.animate();
                 
                 // console.log(gamePlay.guessesRemaining);
                 // drawHangman.drawHangmanArray[gamePlay.guessesRemaining];
@@ -341,6 +345,9 @@ $(document).ready(function () {
                 currentWordDiv.empty();
                 lettersGuessedDiv.empty();
                 gamePlay.initialize();
+                // drawHangman.canvas();
+                context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+                drawHangman.canvas();
             }
         }, 10);
     }
