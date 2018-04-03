@@ -3,7 +3,7 @@ $(document).ready(function () {
     // Define our initial variables, including "wins", "losses", "word array", and an empty variable for the user's letter guess
     var wins = 0;
     var losses = 0;
-    var wordBank = ["jedi","sith","empire","deathstar","force","skywalker","yoda","luke","stormtrooper","leia","chewbacca","tatooine","naboo","alderaan","coruscant","droid","clone","dooku"];
+    var wordBank = ["jedi", "sith", "empire", "deathstar", "force", "skywalker", "yoda", "luke", "stormtrooper", "leia", "chewbacca", "tatooine", "naboo", "alderaan", "coruscant", "droid", "clone", "dooku"];
     // var wordBank = ["jedi","sith","Empire","Deathstar","Force","melon", "city", "square", "pop"];
     var userGuess;
 
@@ -13,16 +13,33 @@ $(document).ready(function () {
     var guessesRemainingDiv = main.find("#guessesRemaining");
     var winsDiv = main.find("#winsPanel");
     var lossesDiv = main.find("#lossesPanel");
+    // var myHangman = main.find("#hangman");
+    // console.log(myHangman);
+    var myHangman = document.getElementById("hangman");
+    // console.log(myHangman);
+    var context = myHangman.getContext('2d');
+    // console.log(context);
+
+    // Hangman
+    // canvas =  function(){
+
+    //     var myStickman = document.getElementById("hangman");
+    //     var context = myStickman.getContext('2d');
+    //     context.beginPath();
+    //     context.strokeStyle = "#fff";
+    //     context.lineWidth = 2;
+    //   };
+    //   canvas();
 
     // Gets Link for Theme Song - Sound from http://www.soundboard.com/sb/sound/657
     var audioElement = document.createElement("audio");
     audioElement.setAttribute("src", "assets/star-wars-theme.mp3");
 
     // Theme Button
-    $("#musicControls").on("click", ".theme-button", function() {
-      audioElement.play();
-    }).on("click", ".pause-button", function() {
-      audioElement.pause();
+    $("#musicControls").on("click", ".theme-button", function () {
+        audioElement.play();
+    }).on("click", ".pause-button", function () {
+        audioElement.pause();
     });
 
 
@@ -44,11 +61,7 @@ $(document).ready(function () {
         guessesRemaining: 10,
         lettersWrong: [],
         lettersCorrect: [],
-        alphabet: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-          'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-          't', 'u', 'v', 'w', 'x', 'y', 'z'],
-      
-
+        alphabet: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
 
         selectWord: function () {
             this.wordBankIndex = Math.floor(Math.random() * wordBank.length);
@@ -105,17 +118,107 @@ $(document).ready(function () {
     }
 
     gamePlay.initialize();
+
     // gamePlay.selectWord();
     // gamePlay.buildWord();
     // gamePlay.initializeGuessesRemaining();
     // gamePlay.secondBuildWord();
 
+    var drawHangman = {
+        drawHangmanArray: [this.rightLeg, this.leftLeg, this.rightArm, this.leftArm, this.torso, this.head, this.frame4, this.frame3, this.frame2, this.frame1],
+
+        // Hangman
+        canvas: function () {
+            context.beginPath();
+            context.strokeStyle = "black";
+            context.lineWidth = 2;
+        },
+
+        head: function () {
+            // myStickman = document.getElementById("stickman");
+            // context = myStickman.getContext('2d');
+            // context.beginPath();
+            // console.log("in head function");
+            // console.log(context);
+            // context.strokeStyle = "blue";
+            // context.lineWidth = 2;
+            context.arc(60, 25, 10, 0, Math.PI * 2, true);
+            context.stroke();
+        },
+
+        draw: function ($pathFromx, $pathFromy, $pathTox, $pathToy) {
+            // context.beginPath();
+            context.moveTo($pathFromx, $pathFromy);
+            context.lineTo($pathTox, $pathToy);
+            context.stroke();
+            console.log("inside draw");
+        },
+
+        frame1: function () {
+            this.draw(0, 140, 140, 140);
+            // this.draw(20, 20, 30, 30);
+            // console.log("inside frame 1");
+            // console.log(this.draw());
+            // context.beginPath();
+            // context.moveTo(20, 20);
+            // context.lineTo(50, 50);
+            // context.stroke();
+        },
+
+        frame2: function () {
+            this.draw(10, 0, 10, 600);
+        },
+
+        frame3: function () {
+            this.draw(0, 5, 70, 5);
+        },
+
+        frame4: function () {
+            this.draw(60, 5, 60, 15);
+        },
+
+        torso: function () {
+            this.draw(60, 36, 60, 70);
+        },
+
+        rightArm: function () {
+            this.draw(60, 46, 100, 50);
+        },
+
+        leftArm: function () {
+            this.draw(60, 46, 20, 50);
+        },
+
+        rightLeg: function () {
+            this.draw(60, 70, 100, 100);
+        },
+
+        leftLeg: function () {
+            this.draw(60, 70, 20, 100);
+        },
+
+        // Animate man
+        animate: function () {
+            var drawMe = lives;
+            drawArray[drawMe]();
+        },
+    }
+
+    // drawHangman.canvas();
+    drawHangman.canvas();
+    // drawHangman.head();
+
+
+
+
+
     // When the user presses a key, it will run the following function...
     document.onkeyup = function (event) {
         // Determines which key is pressed and stores it in "userGuess"
+        
         userGuess = event.key;
-        console.log(userGuess);
-        console.log(gamePlay.mainWord);
+        // console.log(userGuess);
+        // console.log(gamePlay.mainWord);
         var letterCorrect = false;
         var newGuess = true;
         var validGuess = false;
@@ -131,18 +234,21 @@ $(document).ready(function () {
                 newGuess = false;
             }
         }
-        for (l=0; l < gamePlay.alphabet.length; l++) {
+        // Evaluate whether a guess is a valid letter of the alphabet
+        for (l = 0; l < gamePlay.alphabet.length; l++) {
             if (userGuess == gamePlay.alphabet[l]) {
                 validGuess = true;
             }
         }
+
+        // If the guess is a valid input and a new guess then determine whether the guess is correct
         if (newGuess && validGuess) {
             for (i = 0; i < gamePlay.mainWord.length; i++) {
-                console.log(gamePlay.mainWord[i]);
+                // console.log(gamePlay.mainWord[i]);
                 if (userGuess == gamePlay.mainWord[i]) {
                     letterCorrect = true;
                     var currentDiv = main.find(("#Index" + i));
-                    console.log(currentDiv);
+                    // console.log(currentDiv);
                     currentDiv.addClass("oldLetterDiv");
                     currentDiv.removeClass("newLetterDiv");
                     currentDiv.text(userGuess);
@@ -166,6 +272,53 @@ $(document).ready(function () {
                 lettersGuessedDiv.append(letterDiv);
                 gamePlay.lettersWrong.push(userGuess);
                 gamePlay.guessesRemaining = gamePlay.guessesRemaining - 1;
+                
+                // console.log(gamePlay.guessesRemaining);
+                // drawHangman.drawHangmanArray[gamePlay.guessesRemaining];
+                // console.log(drawHangman.drawHangmanArray);
+                // var drawHangmanMethod = drawHangman.drawHangmanArray[gamePlay.guessesRemaining];
+
+                // drawHangman.drawHangmanArray[9];
+                // drawHangman.frame1();
+                // console.log(drawHangman.frame1());
+
+                // drawHangmanArray: [this.rightLeg, this.leftLeg, this.rightArm, this.leftArm, this.torso, this.head, this.frame4, this.frame3, this.frame2, this.frame1];
+
+                switch (gamePlay.guessesRemaining) {
+                    case 9:
+                        drawHangman.frame1();
+                        break;
+                    case 8:
+                    drawHangman.frame2();
+                        break;
+                    case 7:
+                    drawHangman.frame3();
+                        break;
+                    case 6:
+                    drawHangman.frame4();
+                        break;
+                    case 5:
+                    drawHangman.head();
+                        break;
+                    case 4:
+                    drawHangman.torso();
+                        break;
+                    case 3:
+                    drawHangman.leftArm();
+                        break;
+                    case 2:
+                    drawHangman.rightArm();
+                        break;
+                    case 1:
+                    drawHangman.leftLeg();
+                        break;
+                    case 0:
+                        drawHangman.rightLeg();
+                            break;
+                    default:
+                        break;
+                }
+                
             }
         }
 

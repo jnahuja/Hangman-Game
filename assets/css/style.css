@@ -6,6 +6,11 @@ body {
     max-width: 100%;
 }
 
+#hangman {
+    background: white;
+    width: 100%;
+}
+
 .jumbotronHeaderImg {
     background: url("../images/star-wars-title9.JPG");
     background-size: cover;
